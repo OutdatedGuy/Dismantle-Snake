@@ -1,9 +1,10 @@
 class Food {
-	constructor(foodTypes, snake) {
-		this.x;
-		this.y;
-		this.type = 0;
+	x;
+	y;
+	type = 0;
+	num = 1;
 
+	constructor(foodTypes, snake) {
 		this.xMax = snake.xMax;
 		this.yMax = snake.yMax;
 
@@ -24,7 +25,16 @@ class Food {
 			}
 		}
 
-		if (this.x == snake.x && this.y == snake.y) this.newLocation(snake);
+		if (this.x == snake.x && this.y == snake.y) {
+			this.newLocation(snake);
+			return;
+		}
+
+		if (this.num % 7 == 0 && snake.dismantle) this.type = 2;
+		else if (this.num % 5 == 0 && !snake.dismantle) this.type = 1;
+		else this.type = 0;
+
+		this.num++;
 	}
 
 	display() {
