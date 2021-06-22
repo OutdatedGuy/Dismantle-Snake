@@ -1,33 +1,46 @@
 let snake;
 let food;
-let catagory = [];
+let imageCatagory = [];
+const soundCatagory = [
+	new Audio("./assets/Sounds/eat.mp3"),
+	new Audio("./assets/Sounds/break.mp3"),
+	new Audio("./assets/Sounds/gameover.mp3"),
+];
+soundCatagory[2].volume = 1;
+
+const element = document.getElementById("score");
 
 function preload() {
 	let path = "./assets/Images/";
-	catagory[0] = loadImage(path + "Frog.png");
-	catagory[1] = loadImage(path + "disassemble.png");
-	catagory[2] = loadImage(path + "assemble.png");
+	imageCatagory[0] = loadImage(path + "Frog.png");
+	imageCatagory[1] = loadImage(path + "disassemble.png");
+	imageCatagory[2] = loadImage(path + "assemble.png");
 }
 
 function setup() {
-	const canvas = createCanvas(980, 540);
-	canvas.position(
-		(window.innerWidth - width) / 2,
-		(window.innerHeight - height) / 2
-	);
+	createCanvas(980, 540);
 
 	frameRate(15);
 
 	let size = 20;
-	snake = new Snake(width, height, (width - 20) / 2, (height - 20) / 2, size);
+	snake = new Snake(
+		width,
+		height,
+		(width - size) / 2,
+		(height - size) / 2,
+		size,
+		soundCatagory
+	);
 
-	food = new Food(catagory, snake);
+	food = new Food(imageCatagory, snake);
 }
 
 function draw() {
 	background(60);
 
-	food.display(catagory);
+	element.innerText = `Score: ${snake.body.length}`;
+
+	food.display(imageCatagory);
 
 	if (!snake.move()) gameOver();
 	if (snake.eat(food)) food.newLocation(snake);
@@ -41,6 +54,7 @@ function keyPressed() {
 }
 
 function gameOver() {
-	// background(255, 0, 0);
-	noLoop();
+	alert(`Game Over!
+Your final Score is ${snake.body.length}`);
+	setup();
 }
