@@ -41,6 +41,6 @@ function keyPressed() {
 }
 
 function gameOver() {
-	background(255, 0, 0);
+	// background(255, 0, 0);
 	noLoop();
 }
