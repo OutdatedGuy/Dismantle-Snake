@@ -7,6 +7,16 @@ html {
 	background-color: rebeccapurple;
 }
 
+main {
+	text-align: center;
+	color: white;
+}
+
+#score {
+	margin-top: 50px;
+	font-size: 40px;
+}
+
 canvas {
 	position: absolute;
 	top: 50%;
