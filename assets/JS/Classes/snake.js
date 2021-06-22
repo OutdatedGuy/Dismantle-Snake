@@ -29,8 +29,9 @@ class Snake {
 	speedY = 0;
 	body = [];
 	dismantle = false;
+	catagory = [];
 
-	constructor(width, height, xPos = 0, yPos = 0, area = 20) {
+	constructor(width, height, xPos = 0, yPos = 0, area = 20, sounds) {
 		this.x = xPos;
 		this.y = yPos;
 
@@ -38,13 +39,18 @@ class Snake {
 		this.yMax = height;
 
 		this.size = area;
+		this.catagory = sounds;
 	}
 
+	/**
+	 * Returns boolean true if food is eaten.
+	 */
 	eat(food) {
 		if (this.x == food.x && this.y == food.y) {
 			if (food.type != 0) this.dismantle = !this.dismantle;
 			else this.body.push(new SnakeBody());
 
+			this.catagory[0].play();
 			return true;
 		}
 
@@ -59,6 +65,9 @@ class Snake {
 		else if (part.y < 0) part.y = this.yMax - this.size;
 	}
 
+	/**
+	 * Updates speed of head.
+	 */
 	update(newSpeedX, newSpeedY) {
 		this.speedX = newSpeedX * this.size;
 		this.speedY = newSpeedY * this.size;
@@ -95,13 +104,20 @@ class Snake {
 					this.body[i].x = prevX;
 					this.body[i].y = prevY;
 					i--;
+					continue;
 				}
 			}
-		}
 
+			this.catagory[1].play();
+		}
+		
 		this.#display();
 	}
 
+	/**
+	 * Updates the position of Snake.
+	 * If snake dies after moving, boolean false is returned.
+	 */
 	move() {
 		let prevX = this.x;
 		let prevY = this.y;
@@ -114,6 +130,7 @@ class Snake {
 		if (this.#dead()) {
 			this.x = prevX;
 			this.y = prevY;
+			this.catagory[2].play();
 			this.#display();
 
 			return false;
@@ -123,7 +140,7 @@ class Snake {
 		return true;
 	}
 
-	eyes() {
+	#eyes() {
 		var far = (3 * this.size) / 4;
 		var near = this.size / 4;
 		var width = (3 * this.size) / 20;
@@ -153,7 +170,7 @@ class Snake {
 		push();
 		fill(color("#0F0"));
 		square(this.x, this.y, this.size, 5);
-		this.eyes();
+		this.#eyes();
 
 		fill(color("tomato"));
 		for (let i = 0; i < this.body.length; i++)
