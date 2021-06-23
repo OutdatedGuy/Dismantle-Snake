@@ -6,7 +6,7 @@ const soundCatagory = [
 	new Audio("./assets/Sounds/break.mp3"),
 	new Audio("./assets/Sounds/gameover.mp3"),
 ];
-soundCatagory[2].volume = 1;
+soundCatagory[1].volume = 0.2;
 
 const element = document.getElementById("score");
 
@@ -26,10 +26,10 @@ function setup() {
 	snake = new Snake(
 		width,
 		height,
+		soundCatagory,
 		(width - size) / 2,
 		(height - size) / 2,
-		size,
-		soundCatagory
+		size
 	);
 
 	food = new Food(imageCatagory, snake);
@@ -54,7 +54,9 @@ function keyPressed() {
 }
 
 function gameOver() {
-	alert(`Game Over!
+	setTimeout(() => {
+		alert(`Game Over!
 Your final Score is ${snake.body.length}`);
-	setup();
+		setup();
+	}, 0);
 }
