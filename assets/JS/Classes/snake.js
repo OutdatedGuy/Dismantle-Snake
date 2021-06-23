@@ -31,7 +31,7 @@ class Snake {
 	dismantle = false;
 	catagory = [];
 
-	constructor(width, height, xPos = 0, yPos = 0, area = 20, sounds) {
+	constructor(width, height, sounds, xPos = 0, yPos = 0, area = 20) {
 		this.x = xPos;
 		this.y = yPos;
 
@@ -110,7 +110,7 @@ class Snake {
 
 			this.catagory[1].play();
 		}
-		
+
 		this.#display();
 	}
 
