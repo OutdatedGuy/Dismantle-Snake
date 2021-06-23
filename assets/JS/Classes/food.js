@@ -14,9 +14,13 @@ class Food {
 		this.newLocation(snake);
 	}
 
+	/**
+	 * Choses a new random location for food.
+	 * Few location does not overlap with snake.
+	 */
 	newLocation(snake) {
-		this.x = int(random(1, this.xMax / this.size - 2)) * this.size;
-		this.y = int(random(1, this.yMax / this.size - 2)) * this.size;
+		this.x = int(random(0, this.xMax / this.size)) * this.size;
+		this.y = int(random(0, this.yMax / this.size)) * this.size;
 
 		for (let i = 0; i < snake.body.length; i++) {
 			if (this.x == snake.body[i].x && this.y == snake.body[i].y) {
@@ -37,6 +41,9 @@ class Food {
 		this.num++;
 	}
 
+	/**
+	 * Displays the food image depending on its type.
+	 */
 	display() {
 		image(this.catagory[this.type], this.x, this.y, this.size, this.size);
 	}
