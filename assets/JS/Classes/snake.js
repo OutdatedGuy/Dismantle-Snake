@@ -30,6 +30,7 @@ class Snake {
 	body = [];
 	dismantle = false;
 	catagory = [];
+	moved = true;
 
 	constructor(width, height, sounds, xPos = 0, yPos = 0, area = 20) {
 		this.x = xPos;
@@ -48,7 +49,7 @@ class Snake {
 	eat(food) {
 		if (this.x == food.x && this.y == food.y) {
 			if (food.type != 0) this.dismantle = !this.dismantle;
-			else this.body.push(new SnakeBody());
+			else this.body.push(new SnakeBody(food.x, food.y));
 
 			this.catagory[0].play();
 			return true;
@@ -71,6 +72,8 @@ class Snake {
 	update(newSpeedX, newSpeedY) {
 		this.speedX = newSpeedX * this.size;
 		this.speedY = newSpeedY * this.size;
+
+		this.moved = false;
 	}
 
 	#dead() {
@@ -104,7 +107,6 @@ class Snake {
 					this.body[i].x = prevX;
 					this.body[i].y = prevY;
 					i--;
-					continue;
 				}
 			}
 
@@ -136,6 +138,7 @@ class Snake {
 			return false;
 		}
 
+		this.moved = true;
 		this.#moveBody(prevX, prevY);
 		return true;
 	}
