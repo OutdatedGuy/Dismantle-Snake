@@ -68,8 +68,7 @@
 
 	function gameOver() {
 		setTimeout(() => {
-			alert(`Game Over!
-Your final Score is ${snake.body.length}`);
+			alert(`Game Over!\nYour final Score is ${snake.body.length}`);
 			setup();
 		}, 0);
 	}
