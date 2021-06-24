@@ -21,12 +21,11 @@ html {
 }
 
 #canvas {
-	/* display: inline-block; */
+	position: relative;
 	background-color: rgb(60, 60, 60);
 }
 
 #food {
-	/* display: inline-block; */
 	position: absolute;
 }
 
@@ -43,16 +42,24 @@ html {
 }
 
 .snake {
-	/* display: inline-block; */
 	position: absolute;
 
-	width: 20px;
-	height: 20px;
+	width: 18px;
+	height: 18px;
 
 	background-color: #00ff00;
 
 	border: 1px solid black;
 	border-radius: 5px;
+}
+
+.eyes {
+	position: absolute;
+	background-color: black;
+
+	transform: translate(-50%, -50%);
+
+	border-radius: 50%;
 }
 
 .body {

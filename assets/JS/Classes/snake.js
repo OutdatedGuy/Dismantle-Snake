@@ -1,4 +1,6 @@
 class SnakeBody {
+	dismantle = false;
+
 	constructor(xPos = 0, yPos = 0, area = 20) {
 		this.x = xPos;
 		this.y = yPos;
@@ -50,7 +52,11 @@ class Snake {
 	 */
 	eat(food) {
 		if (this.x == food.x && this.y == food.y) {
-			if (food.type != 0) this.dismantle = !this.dismantle;
+			if (food.type == 1) {
+				this.dismantle = true;
+				for (let i = 0; i < snake.body.length; i++)
+					snake.body[i].dismantle = true;
+			} else if (food.type == 2) this.dismantle = false;
 			else this.body.push(new SnakeBody(food.x, food.y));
 
 			this.catagory[0].play();
@@ -76,7 +82,7 @@ class Snake {
 		this.speedY = newSpeedY * this.size;
 
 		this.moved = false;
-		console.log("Yess")
+		console.log("Yess");
 	}
 
 	#dead() {
@@ -92,11 +98,13 @@ class Snake {
 			for (let i = this.body.length - 1; i > 0; i--) {
 				this.body[i].x = this.body[i - 1].x;
 				this.body[i].y = this.body[i - 1].y;
+				this.body[i].dismantle = this.body[i - 1].dismantle;
 			}
 
 			if (this.body.length != 0) {
 				this.body[0].x = prevX;
 				this.body[0].y = prevY;
+				this.body[0].dismantle = this.dismantle;
 			}
 		} else {
 			for (let i = 0; i < this.body.length; i++) {
@@ -120,7 +128,7 @@ class Snake {
 	}
 
 	/**
-	 * Updates the position of Snake.
+	 * Updates the position of Snake.  
 	 * If snake dies after moving, boolean false is returned.
 	 */
 	move() {
@@ -147,37 +155,57 @@ class Snake {
 	}
 
 	#eyes() {
-		var far = (3 * this.size) / 4;
-		var near = this.size / 4;
-		var width = (3 * this.size) / 20;
-		var height = (6 * this.size) / 20;
+		let far = (3 * this.size) / 4;
+		let near = this.size / 4;
+		let width = (3 * this.size) / 20;
+		let height = (6 * this.size) / 20;
 
-		push();
-		fill(0);
-		noStroke();
-		ellipseMode(CENTER);
 		if (this.speedX > 0) {
-			ellipse(this.x + far, this.y + near, height, width);
-			ellipse(this.x + far, this.y + far, height, width);
+			return `<div class="eyes" style="top: ${this.y + near}px; left: ${
+				this.x + far
+			}px; width: ${height}px; height: ${width}px"></div>
+			<div class="eyes" style="top: ${this.y + far}px; left: ${
+				this.x + far
+			}px; width: ${height}px; height: ${width}px"></div>`;
 		} else if (this.speedX < 0) {
-			ellipse(this.x + near, this.y + near, height, width);
-			ellipse(this.x + near, this.y + far, height, width);
+			return `<div class="eyes" style="top: ${this.y + near}px; left: ${
+				this.x + near
+			}px; width: ${height}px; height: ${width}px"></div>
+				<div class="eyes" style="top: ${this.y + far}px; left: ${
+				this.x + near
+			}px; width: ${height}px; height: ${width}px"></div>`;
 		} else if (this.speedY < 0) {
-			ellipse(this.x + near, this.y + near, width, height);
-			ellipse(this.x + far, this.y + near, width, height);
+			return `<div class="eyes" style="top: ${this.y + near}px; left: ${
+				this.x + near
+			}px; width: ${width}px; height: ${height}px"></div>
+				<div class="eyes" style="top: ${this.y + near}px; left: ${
+				this.x + far
+			}px; width: ${width}px; height: ${height}px"></div>`;
 		} else if (this.speedY > 0) {
-			ellipse(this.x + near, this.y + far, width, height);
-			ellipse(this.x + far, this.y + far, width, height);
-		}
-		pop();
+			return `<div class="eyes" style="top: ${this.y + far}px; left: ${
+				this.x + near
+			}px; width: ${width}px; height: ${height}px"></div>
+				<div class="eyes" style="top: ${this.y + far}px; left: ${
+				this.x + far
+			}px; width: ${width}px; height: ${height}px"></div>`;
+		} else return "";
 	}
 
 	#display() {
 		let body = "";
 		body = `<div class="snake" style="top: ${this.y}px; left: ${this.x}px;"></div>`;
+		body += this.#eyes();
 
-		for (let i = 0; i < snake.body.length; i++)
-			body += `<div class="snake body" style="top: ${snake.body[i].y}px; left: ${snake.body[i].x}px;"></div>`;
+		if (this.dismantle)
+			for (let i = 0; i < snake.body.length; i++)
+				body += `<div class="snake enemy" style="top: ${snake.body[i].y}px; left: ${snake.body[i].x}px;"></div>`;
+		else {
+			for (let i = 0; i < snake.body.length; i++) {
+				let tatakae = "body";
+				if (snake.body[i].dismantle) tatakae = "enemy";
+				body += `<div class="snake ${tatakae}" style="top: ${snake.body[i].y}px; left: ${snake.body[i].x}px;"></div>`;
+			}
+		}
 
 		this.element.innerHTML = body;
 	}

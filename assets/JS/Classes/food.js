@@ -24,7 +24,7 @@ class Food {
 	}
 
 	/**
-	 * Sets the postion of food by top and left properties.
+	 * Sets the postion of food by top and left properties.  
 	 * Type of food is represented by class name.
 	 */
 	#setPosition(left, top, type) {
@@ -35,7 +35,7 @@ class Food {
 	}
 
 	/**
-	 * Choses a new random location for food.
+	 * Choses a new random location for food.  
 	 * Food location does not overlap with snake.
 	 */
 	newLocation(snake) {
