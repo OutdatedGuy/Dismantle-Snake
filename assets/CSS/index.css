@@ -7,19 +7,58 @@ html {
 	background-color: rebeccapurple;
 }
 
-main {
-	text-align: center;
-	color: white;
-}
-
-#score {
-	margin-top: 50px;
-	font-size: 40px;
-}
-
-canvas {
+.container {
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+}
+
+#score {
+	font-size: 40px;
+	text-align: center;
+	color: white;
+}
+
+#canvas {
+	/* display: inline-block; */
+	background-color: rgb(60, 60, 60);
+}
+
+#food {
+	/* display: inline-block; */
+	position: absolute;
+}
+
+.type0 {
+	content: url(../Images/Frog.png);
+}
+
+.type1 {
+	content: url(../Images/Disassemble.png);
+}
+
+.type2 {
+	content: url(../Images/Assemble.png);
+}
+
+.snake {
+	/* display: inline-block; */
+	position: absolute;
+
+	width: 20px;
+	height: 20px;
+
+	background-color: #00ff00;
+
+	border: 1px solid black;
+	border-radius: 5px;
+}
+
+.body {
+	background-color: greenyellow;
+}
+
+.enemy {
+	background-color: tomato;
 }

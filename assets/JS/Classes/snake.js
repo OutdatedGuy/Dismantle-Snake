@@ -17,7 +17,8 @@ class SnakeBody {
 			[-1, 0],
 		];
 
-		let coor = random(direction);
+		let item = Math.floor(Math.random() * direction.length);
+		let coor = direction[item];
 
 		this.x += coor[0] * this.size;
 		this.y += coor[1] * this.size;
@@ -32,7 +33,7 @@ class Snake {
 	catagory = [];
 	moved = true;
 
-	constructor(width, height, sounds, xPos = 0, yPos = 0, area = 20) {
+	constructor(width, height, sounds, element, xPos = 0, yPos = 0, area = 20) {
 		this.x = xPos;
 		this.y = yPos;
 
@@ -41,6 +42,7 @@ class Snake {
 
 		this.size = area;
 		this.catagory = sounds;
+		this.element = element;
 	}
 
 	/**
@@ -74,6 +76,7 @@ class Snake {
 		this.speedY = newSpeedY * this.size;
 
 		this.moved = false;
+		console.log("Yess")
 	}
 
 	#dead() {
@@ -170,14 +173,12 @@ class Snake {
 	}
 
 	#display() {
-		push();
-		fill(color("#0F0"));
-		square(this.x, this.y, this.size, 5);
-		this.#eyes();
+		let body = "";
+		body = `<div class="snake" style="top: ${this.y}px; left: ${this.x}px;"></div>`;
 
-		fill(color("tomato"));
-		for (let i = 0; i < this.body.length; i++)
-			square(this.body[i].x, this.body[i].y, this.size, 5);
-		pop();
+		for (let i = 0; i < snake.body.length; i++)
+			body += `<div class="snake body" style="top: ${snake.body[i].y}px; left: ${snake.body[i].x}px;"></div>`;
+
+		this.element.innerHTML = body;
 	}
 }

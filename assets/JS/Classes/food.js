@@ -4,23 +4,45 @@ class Food {
 	type = 0;
 	num = 1;
 
-	constructor(foodTypes, snake) {
+	constructor(snake, element) {
 		this.xMax = snake.xMax;
 		this.yMax = snake.yMax;
 
 		this.size = snake.size;
-		this.catagory = foodTypes;
+		this.element = element;
 
+		this.#setSize();
 		this.newLocation(snake);
 	}
 
 	/**
+	 * Sets the value of width and height for food.
+	 */
+	#setSize() {
+		this.element.style.width = this.size + "px";
+		this.element.style.height = this.size + "px";
+	}
+
+	/**
+	 * Sets the postion of food by top and left properties.
+	 * Type of food is represented by class name.
+	 */
+	#setPosition(left, top, type) {
+		this.element.style.top = top + "px";
+		this.element.style.left = left + "px";
+
+		this.element.className = `type${type}`;
+	}
+
+	/**
 	 * Choses a new random location for food.
-	 * Few location does not overlap with snake.
+	 * Food location does not overlap with snake.
 	 */
 	newLocation(snake) {
-		this.x = int(random(0, this.xMax / this.size)) * this.size;
-		this.y = int(random(0, this.yMax / this.size)) * this.size;
+		this.x =
+			Math.floor(Math.random() * (this.xMax / this.size)) * this.size;
+		this.y =
+			Math.floor(Math.random() * (this.yMax / this.size)) * this.size;
 
 		for (let i = 0; i < snake.body.length; i++) {
 			if (this.x == snake.body[i].x && this.y == snake.body[i].y) {
@@ -39,12 +61,6 @@ class Food {
 		else this.type = 0;
 
 		this.num++;
-	}
-
-	/**
-	 * Displays the food image depending on its type.
-	 */
-	display() {
-		image(this.catagory[this.type], this.x, this.y, this.size, this.size);
+		this.#setPosition(this.x, this.y, this.type);
 	}
 }

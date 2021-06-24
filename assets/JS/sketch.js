@@ -1,75 +1,68 @@
-{
-	let snake;
-	let food;
-	let imageCatagory = [];
-	const soundCatagory = [
-		new Audio("./assets/Sounds/eat.mp3"),
-		new Audio("./assets/Sounds/break.mp3"),
-		new Audio("./assets/Sounds/gameover.mp3"),
-	];
-	soundCatagory[1].volume = 0.2;
+// {
+let width = 980,
+	height = 540;
+const soundCatagory = [
+	new Audio("./assets/Sounds/eat.mp3"),
+	new Audio("./assets/Sounds/break.mp3"),
+	new Audio("./assets/Sounds/gameover.mp3"),
+];
+soundCatagory[1].volume = 0.2;
 
-	const element = document.getElementById("score");
+const canvas = document.getElementById("canvas");
+canvas.style.width = width + "px";
+canvas.style.height = height + "px";
 
-	function preload() {
-		let path = "./assets/Images/";
-		imageCatagory[0] = loadImage(path + "Frog.png");
-		imageCatagory[1] = loadImage(path + "disassemble.png");
-		imageCatagory[2] = loadImage(path + "assemble.png");
-	}
+const score = document.getElementById("score");
+document.onkeydown = keyPressed;
 
-	function setup() {
-		createCanvas(980, 540);
+let size = 20;
+const snake = new Snake(
+	width,
+	height,
+	soundCatagory,
+	document.getElementById("snake"),
+	(width - size) / 2,
+	(height - size) / 2,
+	size
+);
 
-		frameRate(15);
+const food = new Food(snake, document.getElementById("food"));
 
-		let size = 20;
-		snake = new Snake(
-			width,
-			height,
-			soundCatagory,
-			(width - size) / 2,
-			(height - size) / 2,
-			size
-		);
+const draw = setInterval(game, 1000 / 15);
 
-		food = new Food(imageCatagory, snake);
-	}
+function game() {
+	score.innerText = `Score: ${snake.body.length}`;
 
-	function draw() {
-		background(60);
-
-		element.innerText = `Score: ${snake.body.length}`;
-
-		food.display();
-
-		if (!snake.move()) gameOver();
-		if (snake.eat(food)) food.newLocation(snake);
-	}
-
-	function keyPressed() {
-		let xS, yS;
-
-		if (keyCode === UP_ARROW && snake.speedY == 0) (xS = 0), (yS = -1);
-		else if (keyCode === RIGHT_ARROW && snake.speedX == 0)
-			(xS = 1), (yS = 0);
-		else if (keyCode === DOWN_ARROW && snake.speedY == 0)
-			(xS = 0), (yS = 1);
-		else if (keyCode === LEFT_ARROW && snake.speedX == 0)
-			(xS = -1), (yS = 0);
-		else return;
-
-		if (snake.moved) snake.update(xS, yS);
-		else
-			setTimeout(() => {
-				snake.update(xS, yS);
-			}, 69);
-	}
-
-	function gameOver() {
-		setTimeout(() => {
-			alert(`Game Over!\nYour final Score is ${snake.body.length}`);
-			setup();
-		}, 0);
-	}
+	if (!snake.move()) gameOver();
+	if (snake.eat(food)) food.newLocation(snake);
 }
+
+function keyPressed(e) {
+	let xS, yS;
+	console.log(e.keyCode);
+
+	if ((e.keyCode == 38 || e.keyCode == 87) && snake.speedY == 0)
+		(xS = 0), (yS = -1);
+	else if ((e.keyCode == 39 || e.keyCode == 68) && snake.speedX == 0)
+		(xS = 1), (yS = 0);
+	else if ((e.keyCode == 40 || e.keyCode == 83) && snake.speedY == 0)
+		(xS = 0), (yS = 1);
+	else if ((e.keyCode == 37 || e.keyCode == 65) && snake.speedX == 0)
+		(xS = -1), (yS = 0);
+	else return;
+
+	if (snake.moved) snake.update(xS, yS);
+	else
+		setTimeout(() => {
+			snake.update(xS, yS);
+		}, 69);
+}
+
+function gameOver() {
+	setTimeout(() => {
+		clearInterval(draw);
+		alert(`Game Over!\nYour final Score is ${snake.body.length}`);
+		setup();
+	}, 0);
+}
+// }
