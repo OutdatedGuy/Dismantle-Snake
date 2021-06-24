@@ -1,5 +1,5 @@
 class SnakeBody {
-	dismantle = false;
+	dismantle = true;
 
 	constructor(xPos = 0, yPos = 0, area = 20) {
 		this.x = xPos;
@@ -54,8 +54,8 @@ class Snake {
 		if (this.x == food.x && this.y == food.y) {
 			if (food.type == 1) {
 				this.dismantle = true;
-				for (let i = 0; i < snake.body.length; i++)
-					snake.body[i].dismantle = true;
+				for (let i = 0; i < this.body.length; i++)
+					this.body[i].dismantle = true;
 			} else if (food.type == 2) this.dismantle = false;
 			else this.body.push(new SnakeBody(food.x, food.y));
 
@@ -82,7 +82,6 @@ class Snake {
 		this.speedY = newSpeedY * this.size;
 
 		this.moved = false;
-		console.log("Yess");
 	}
 
 	#dead() {
@@ -128,7 +127,7 @@ class Snake {
 	}
 
 	/**
-	 * Updates the position of Snake.  
+	 * Updates the position of Snake.
 	 * If snake dies after moving, boolean false is returned.
 	 */
 	move() {
@@ -197,13 +196,13 @@ class Snake {
 		body += this.#eyes();
 
 		if (this.dismantle)
-			for (let i = 0; i < snake.body.length; i++)
-				body += `<div class="snake enemy" style="top: ${snake.body[i].y}px; left: ${snake.body[i].x}px;"></div>`;
+			for (let i = 0; i < this.body.length; i++)
+				body += `<div class="snake enemy" style="top: ${this.body[i].y}px; left: ${this.body[i].x}px;"></div>`;
 		else {
-			for (let i = 0; i < snake.body.length; i++) {
+			for (let i = 0; i < this.body.length; i++) {
 				let tatakae = "body";
-				if (snake.body[i].dismantle) tatakae = "enemy";
-				body += `<div class="snake ${tatakae}" style="top: ${snake.body[i].y}px; left: ${snake.body[i].x}px;"></div>`;
+				if (this.body[i].dismantle) tatakae = "enemy";
+				body += `<div class="snake ${tatakae}" style="top: ${this.body[i].y}px; left: ${this.body[i].x}px;"></div>`;
 			}
 		}
 

@@ -1,4 +1,3 @@
-// {
 const width = 980,
 	height = 540;
 
@@ -33,8 +32,8 @@ function setup() {
 	food = new Food(snake, document.getElementById("food"));
 }
 setup();
-const draw = setInterval(game, 1000 / 15);
 
+let draw = setInterval(game, 1000 / 15);
 function game() {
 	score.innerText = `Score: ${snake.body.length}`;
 
@@ -44,7 +43,6 @@ function game() {
 
 function keyPressed(e) {
 	let xS, yS;
-	console.log(e.keyCode);
 
 	if ((e.keyCode == 38 || e.keyCode == 87) && snake.speedY == 0)
 		(xS = 0), (yS = -1);
@@ -57,17 +55,16 @@ function keyPressed(e) {
 	else return;
 
 	if (snake.moved) snake.update(xS, yS);
-	else
+	else {
 		setTimeout(() => {
 			snake.update(xS, yS);
 		}, 69);
+	}
 }
 
 function gameOver() {
 	setTimeout(() => {
-		// clearInterval(draw);
 		alert(`Game Over!\nYour final Score is ${snake.body.length}`);
 		setup();
 	}, 0);
 }
-// }
