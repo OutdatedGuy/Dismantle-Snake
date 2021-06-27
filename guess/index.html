@@ -7,7 +7,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Choose 1 Option</title>
 
-    <link rel="stylesheet" href="./assets/index.css">
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        html {
+            background-color: black;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-width: 100%;
+
+            justify-items: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        button {
+            box-shadow: inset 0px 1px 0px 0px #fff6af;
+            background: linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
+            background-color: #ffec64;
+            border-radius: 6px;
+            border: 1px solid #ffaa22;
+            display: inline-block;
+            cursor: pointer;
+            color: #333333;
+            font-family: Arial;
+            font-size: 5vw;
+            font-weight: bold;
+            padding: 3vw 5vw;
+            text-decoration: none;
+            text-shadow: 0px 1px 0px #ffee66;
+        }
+
+        button:hover {
+            background: linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
+            background-color: #ffab23;
+        }
+
+        button:active {
+            position: relative;
+            top: 1px;
+        }
+    </style>
 </head>
 
 <body>
