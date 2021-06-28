@@ -1,0 +1,62 @@
+#instructions {
+	display: none;
+
+    column-gap: 30px;
+
+	position: absolute;
+	align-items: center;
+
+	text-align: center;
+	font-size: 16px;
+	color: white;
+}
+#instructions img {
+	width: 60%;
+	height: 50%;
+}
+
+#instructions .info {
+	display: grid;
+	grid-template-columns: 20% 20% 60%;
+
+	justify-items: center;
+	align-items: center;
+}
+#instructions .info .edible {
+	width: 80%;
+	height: 40%;
+}
+#instructions .info .arrow {
+	width: 70%;
+	height: 20%;
+}
+#instructions .info .effect {
+	width: 100%;
+	height: 100%;
+}
+
+#instructions button {
+	box-shadow: inset 0px 1px 0px 0px #fff6af;
+	background: linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
+	background-color: #ffec64;
+	border-radius: 6px;
+	border: 1px solid #ffaa22;
+	display: inline-block;
+	cursor: pointer;
+	color: #333333;
+	font-family: Arial;
+	font-size: large;
+	font-weight: bold;
+	padding: 6px 10px;
+	text-decoration: none;
+	text-shadow: 0px 1px 0px #ffee66;
+    line-height: 1.5;
+}
+#instructions button:hover {
+	background: linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
+	background-color: #ffab23;
+}
+#instructions button:active {
+	position: relative;
+	top: 1px;
+}

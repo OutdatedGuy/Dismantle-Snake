@@ -9,6 +9,7 @@
     <link rel="shortcut icon" href="./assets/Icon/favicon.ico" type="image/x-icon">
 
     <link rel="stylesheet" href="./assets/CSS/index.css">
+    <link rel="stylesheet" href="./assets/CSS/instructions.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.3.1/p5.min.js"
         integrity="sha512-gQVBYBvfC+uyor5Teonjr9nmY1bN+DlOCezkhzg4ShpC5q81ogvFsr5IV4xXAj6HEtG7M1Pb2JCha97tVFItYQ=="
@@ -19,6 +20,53 @@
     <main>
         <div id="container">
             <div id="score"></div>
+            <div id="canvas">
+                <div id="instructions">
+                    <div>
+                        <img src="./assets/Images/Eat/Frog.png">
+                        <p>Eating this will Increase your Snake's Length <br /> (i.e score)</p>
+                    </div>
+
+                    <div>
+                        <div class="info">
+                            <img class="edible" src="./assets/Images/Eat/Disassemble.png">
+                            <img class="arrow" src="./assets/Images/Instructions/Arrow.png">
+                            <img class="effect" src="./assets/Images/Instructions/Separate.png">
+                        </div>
+                        <p>Eating this will Disassemble (Dismantle) <br /> your Snake's body</p>
+                    </div>
+
+                    <div>
+                        <div class="info">
+                            <img class="edible" src="./assets/Images/Eat/Assemble.png">
+                            <img class="arrow" src="./assets/Images/Instructions/Arrow.png">
+                            <img class="effect" src="./assets/Images/Instructions/Join.png">
+                        </div>
+                        <p>Eating this will Re-assemble your Snake's body</p>
+                    </div>
+
+                    <div>
+                        <img src="./assets/Images/Instructions/Dead.png">
+                        <p>Crashing into your own body will result in <br /> Game Over!!</p>
+                    </div>
+
+                    <div>
+                        <img src="./assets/Images/Instructions/Teleport.png">
+                        <p>Snake can Teleport across the edges</p>
+                    </div>
+
+                    <div>
+                        <button onclick="startIt()">
+                            Click Here
+                            <br />Or<br />
+                            Press Enter
+                            <br />
+                            To PLAY
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div id="highscore"></div>
         </div>
     </main>
 
