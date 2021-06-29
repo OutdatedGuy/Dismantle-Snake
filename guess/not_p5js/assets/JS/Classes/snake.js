@@ -142,8 +142,15 @@ class Snake {
 		if (this.#dead()) {
 			this.x = prevX;
 			this.y = prevY;
+
 			this.catagory[2].play();
 			this.#display();
+
+			if (
+				localStorage.getItem("highscore") < this.body.length ||
+				localStorage.getItem("highscore") === "NA"
+			)
+				localStorage.setItem("highscore", this.body.length);
 
 			return false;
 		}

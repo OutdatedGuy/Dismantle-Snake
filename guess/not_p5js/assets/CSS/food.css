@@ -1,0 +1,15 @@
+#food {
+	position: absolute;
+}
+
+.type0 {
+	content: url(../Images/Eat/Frog.png);
+}
+
+.type1 {
+	content: url(../Images/Eat/Disassemble.png);
+}
+
+.type2 {
+	content: url(../Images/Eat/Assemble.png);
+}

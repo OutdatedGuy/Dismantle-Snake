@@ -1,0 +1,28 @@
+.snake {
+	position: absolute;
+
+	width: 18px;
+	height: 18px;
+
+	background-color: #00ff00;
+
+	border: 1px solid black;
+	border-radius: 5px;
+}
+
+.eyes {
+	position: absolute;
+	background-color: black;
+
+	transform: translate(-50%, -50%);
+
+	border-radius: 50%;
+}
+
+.body {
+	background-color: greenyellow;
+}
+
+.enemy {
+	background-color: tomato;
+}

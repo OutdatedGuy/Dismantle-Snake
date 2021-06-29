@@ -14,7 +14,7 @@ html {
 	transform: translate(-50%, -50%);
 }
 
-#score {
+#score, #highscore {
 	font-size: 40px;
 	text-align: center;
 	color: white;
@@ -23,49 +23,4 @@ html {
 #canvas {
 	position: relative;
 	background-color: rgb(60, 60, 60);
-}
-
-#food {
-	position: absolute;
-}
-
-.type0 {
-	content: url(../Images/Frog.png);
-}
-
-.type1 {
-	content: url(../Images/Disassemble.png);
-}
-
-.type2 {
-	content: url(../Images/Assemble.png);
-}
-
-.snake {
-	position: absolute;
-
-	width: 18px;
-	height: 18px;
-
-	background-color: #00ff00;
-
-	border: 1px solid black;
-	border-radius: 5px;
-}
-
-.eyes {
-	position: absolute;
-	background-color: black;
-
-	transform: translate(-50%, -50%);
-
-	border-radius: 50%;
-}
-
-.body {
-	background-color: greenyellow;
-}
-
-.enemy {
-	background-color: tomato;
 }
