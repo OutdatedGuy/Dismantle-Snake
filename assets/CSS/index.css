@@ -7,6 +7,10 @@ html {
 	background-color: rebeccapurple;
 }
 
+body {
+	overscroll-behavior: contain;
+}
+
 .container {
 	position: absolute;
 	top: calc(50% - 30px);
@@ -31,4 +35,8 @@ html {
 #canvas {
 	position: relative;
 	background-color: rgb(60, 60, 60);
+}
+
+.ui-loader.ui-corner-all.ui-body-a.ui-loader-default {
+	display: none;
 }
