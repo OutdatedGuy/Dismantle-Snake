@@ -1,6 +1,18 @@
 {
-	const width = 980,
+	let width = 980,
 		height = 540;
+	const size = 20;
+	let frames = 15;
+
+	if (window.innerWidth < 1000) {
+		width = window.innerWidth * 0.9;
+		width -= width % size;
+	}
+	if (window.innerHeight < 700) {
+		height = (window.innerHeight - 120) * 0.9;
+		height -= height % size;
+	}
+	if (window.innerWidth < 700) frames = 10;
 
 	let snake, food;
 	let draw,
@@ -23,14 +35,19 @@
 		];
 		soundCatagory[1].volume = 0.2;
 
-		let size = 20;
+		let startPosX = (width - size) / 2;
+		let startPosY = (height - size) / 2;
+
+		if (((width / 20) % 10) % 2 == 0) startPosX -= size / 2;
+		if (((height / 20) % 10) % 2 == 0) startPosY -= size / 2;
+
 		snake = new Snake(
 			width,
 			height,
 			soundCatagory,
 			document.getElementById("snake"),
-			(width - size) / 2,
-			(height - size) / 2,
+			startPosX,
+			startPosY,
 			size
 		);
 
@@ -99,7 +116,7 @@
 
 	function startIt() {
 		document.getElementById("instructions").style.display = "none";
-		draw = setInterval(game, 1000 / 15);
+		draw = setInterval(game, 1000 / frames);
 		isPlaying = true;
 		food = new Food(snake, document.getElementById("food"));
 	}
