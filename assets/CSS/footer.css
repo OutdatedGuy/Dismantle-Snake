@@ -1,0 +1,39 @@
+.social {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(100px, 250px));
+	grid-template-rows: 50px;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+.social a {
+	text-decoration: none;
+	color: #333;
+	font-size: 2em;
+	font-weight: 800;
+}
+
+.social img {
+	width: 25px;
+	height: 25px;
+}
+
+footer {
+	position: fixed;
+	bottom: 0%;
+	width: 100%;
+	height: 50px;
+	background-color: cyan;
+	font-family: "Poppins", sans-serif;
+}
+
+@media only screen and (max-width: 600px) {
+	.social img {
+		display: none;
+	}
+
+	.social a {
+		font-size: 1.5em;
+	}
+}
