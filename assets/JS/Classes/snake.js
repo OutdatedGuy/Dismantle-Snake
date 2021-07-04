@@ -147,7 +147,7 @@ class Snake {
 			this.#display();
 
 			if (
-				localStorage.getItem("highscore") < this.body.length ||
+				Number(localStorage.getItem("highscore")) < this.body.length ||
 				localStorage.getItem("highscore") === "NA"
 			)
 				localStorage.setItem("highscore", this.body.length);
